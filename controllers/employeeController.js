@@ -1,18 +1,17 @@
 import db from "../db.js";
 import {collection, addDoc, getDocs} from "firebase/firestore";
 
+// TODO
 import Employee from "../models/employee.js";
 
 // performing crud operations in the firebase firestore
 // add
 // get all
+// TODO
 // get
 // update
 // delete
 export const addEmployee = async (req, res, next) => {
-
-    console.log('db', db);
-
     try {
         console.log("Adding new employee");
         const data = req.body;
@@ -25,9 +24,7 @@ export const addEmployee = async (req, res, next) => {
 };
 
 export const getAllEmployees = async (req, res, next) => {
-    // try {
     console.log("Getting all employees");
-
     const querySnapshot = await getDocs(collection(db, "employees"));
 
     const arr = [];
@@ -88,6 +85,7 @@ export const getAllEmployees = async (req, res, next) => {
 export default {
     addEmployee: addEmployee,
     getAllEmployees: getAllEmployees,
+    // TODO
     // getEmployee,
     // updateEmployee,
     // deleteEmployee

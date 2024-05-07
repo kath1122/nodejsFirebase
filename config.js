@@ -1,5 +1,8 @@
 import dotenv from "dotenv";
 
+/**
+ * dotenv 是一個插件，可以將.env的內容存到 process.env 之後讀入
+ */
 dotenv.config();
 
 const {
