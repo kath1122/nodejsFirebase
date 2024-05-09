@@ -2,8 +2,8 @@ import express from 'express';
 import {
     addEmployee,
     getAllEmployees,
+    getEmployee,
     // TODO 尚未完成，完成後才要打開
-    // getEmployee,
     // updateEmployee,
     // deleteEmployee
 } from "../controllers/employeeController.js";
@@ -33,7 +33,7 @@ router.get("/employees", getAllEmployees);
 
 // TODO 尚未完成，完成後才要打開
 // http://localhost:3000/api/employee/xxxx_employee_id
-// router.get("/employee/:id", getEmployee);
+router.get("/employee/:id", getEmployee);
 
 // TODO 尚未完成，完成後才要打開
 // http://localhost:3000/api/employee/xxxx_employee_id
