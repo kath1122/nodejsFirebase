@@ -3,9 +3,8 @@ import {
     addEmployee,
     getAllEmployees,
     getEmployee,
-    // TODO 尚未完成，完成後才要打開
-    // updateEmployee,
-    // deleteEmployee
+    deleteEmployee,
+    updateEmployee,
 } from "../controllers/employeeController.js";
 
 const router = express.Router();
@@ -26,22 +25,28 @@ router.get("/", (req, res, next) => {
 router.post("/employee", addEmployee);
 
 /**
- 此路由為Get, 讀取員工用
- http://localhost:3000/api/employee
+ 此路由為Get, 讀取全部員工用
+ http://localhost:3000/api/employees
  **/
 router.get("/employees", getAllEmployees);
 
-// TODO 尚未完成，完成後才要打開
-// http://localhost:3000/api/employee/xxxx_employee_id
+/**
+ 此路由為Get, 讀取特定員工用
+ http://localhost:3000/api/employee
+ **/
 router.get("/employee/:id", getEmployee);
 
-// TODO 尚未完成，完成後才要打開
-// http://localhost:3000/api/employee/xxxx_employee_id
-// router.put("/employee/:id", updateEmployee);
+/**
+ 此路由為delete, 刪除特定員工用
+ http://localhost:3000/api/employee
+ **/
+router.delete("/employee/:id", deleteEmployee);
 
-// TODO 尚未完成，完成後才要打開
-// http://localhost:3000/api/employee/xxxx_employee_id
-// router.delete("/employee/:id", deleteEmployee);
+/**
+ 此路由為put, 更新特定員工用
+ http://localhost:3000/api/employee/xxxx_employee_id
+ **/
+router.put("/employee/:id", updateEmployee);
 
 export default {
     routes: router

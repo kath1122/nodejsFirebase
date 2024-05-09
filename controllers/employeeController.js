@@ -1,8 +1,5 @@
 import db from "../db.js";
-import {collection, doc, addDoc, getDocs, getDoc} from "firebase/firestore";
-
-// TODO
-import Employee from "../models/employee.js";
+import {collection, doc, addDoc, deleteDoc, getDocs, getDoc, runTransaction} from "firebase/firestore";
 
 export const addEmployee = async (req, res, next) => {
     try {
@@ -63,34 +60,37 @@ export const getEmployee = async (req, res, next) => {
 };
 
 
-// const updateEmployee = async (req, res, next) => {
-//     try {
-//         const id = req.params.id;
-//         console.log("Updating employee= %s", id);
-//         const data = req.body;
-//         const employee = await fireStore.collection("employees").doc(id);
-//         await employee.update(data);
-//         res.status(204).json({ message: "Record updated successfully" });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// };
+export const updateEmployee = async (req, res, next) => {
+    try {
+        // 從 request 的參數部分 取得 id
+        const id = req.params.id;
+        console.log("Updating employee= %s", id);
 
-// const deleteEmployee = async (req, res, next) => {
-//     try {
-//         const id = req.params.id;
-//         console.log("Deleting employee= %s", id);
-//         await fireStore.collection("employees").doc(id).delete();
-//         res.status(204).json({ message: "Record deleted successfully" });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// };
-export default {
-    addEmployee,
-    getAllEmployees,
-    getEmployee,
-    // TODO
-    // updateEmployee,
-    // deleteEmployee
+        await runTransaction(db, async (transaction) => {
+            const docRef = doc(db, "employees", id);
+            const sfDoc = await transaction.get(docRef);
+
+            if (!sfDoc.exists()) {
+                throw "Document does not exist!";
+            }
+            // 從 body 給的內容全部更新！
+            console.log(req.body)
+            transaction.update(docRef, req.body);
+        });
+        res.status(200).json({ message: "Transaction successfully committed!" });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+export const deleteEmployee = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        console.log("Deleting employee= %s", id);
+
+        await deleteDoc(doc(db, "employees", id));
+        res.status(204).json({ message: "Record deleted successfully" });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 };
