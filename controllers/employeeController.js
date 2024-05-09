@@ -27,7 +27,9 @@ export const getAllEmployees = async (req, res, next) => {
         res.status(200).json({message: "No records found"});
     } else {
         querySnapshot.forEach(itemSnap => {
-            const item = itemSnap.data();
+            console.log(itemSnap.id);
+            let item = itemSnap.data();
+            item.id = itemSnap.id
             console.log({item});
             arr.push(item)
         })
