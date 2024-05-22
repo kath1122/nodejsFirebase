@@ -1,10 +1,10 @@
 import express from 'express';
 import {
-    addEmployee,
-    getAllEmployees,
-    getEmployee,
-    deleteEmployee,
-    updateEmployee,
+    addTask,
+    getAllTasks,
+    getTask,
+    deleteTask,
+    updateTask,
 } from "../controllers/employeeController.js";
 
 const router = express.Router();
@@ -20,33 +20,33 @@ router.get("/", (req, res, next) => {
 
 /**
  此路由為Post, 增加員工用
- http://localhost:3000/api/employee
+ http://localhost:3000/api/task
  **/
-router.post("/employee", addEmployee);
+router.post("/task", addTask);
 
 /**
  此路由為Get, 讀取全部員工用
- http://localhost:3000/api/employees
+ http://localhost:3000/api/tasks
  **/
-router.get("/employees", getAllEmployees);
+router.get("/tasks", getAllTasks);
 
 /**
  此路由為Get, 讀取特定員工用
- http://localhost:3000/api/employee
+ http://localhost:3000/api/task
  **/
-router.get("/employee/:id", getEmployee);
+router.get("/task/:id", getTask);
 
 /**
  此路由為delete, 刪除特定員工用
- http://localhost:3000/api/employee
+ http://localhost:3000/api/task
  **/
-router.delete("/employee/:id", deleteEmployee);
+router.delete("/task/:id", deleteTask);
 
 /**
  此路由為put, 更新特定員工用
- http://localhost:3000/api/employee/xxxx_employee_id
+ http://localhost:3000/api/task/xxxx_task_id
  **/
-router.put("/employee/:id", updateEmployee);
+router.put("/task/:id", updateTask);
 
 export default {
     routes: router

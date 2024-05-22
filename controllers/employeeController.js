@@ -1,7 +1,7 @@
 import db from "../db.js";
 import {collection, doc, addDoc, deleteDoc, getDocs, getDoc, runTransaction} from "firebase/firestore";
 
-export const addEmployee = async (req, res, next) => {
+export const addTask = async (req, res, next) => {
     try {
         console.log("Adding new employee");
         const data = req.body;
@@ -18,7 +18,7 @@ export const addEmployee = async (req, res, next) => {
     }
 };
 
-export const getAllEmployees = async (req, res, next) => {
+export const getAllTasks = async (req, res, next) => {
     console.log("Getting all employees");
     const querySnapshot = await getDocs(collection(db, "employees"));
 
@@ -41,7 +41,7 @@ export const getAllEmployees = async (req, res, next) => {
     }
 }
 
-export const getEmployee = async (req, res, next) => {
+export const getTask = async (req, res, next) => {
     try {
         // 從 request 的參數部分 取得 id
         const id = req.params.id;
@@ -62,7 +62,7 @@ export const getEmployee = async (req, res, next) => {
 };
 
 
-export const updateEmployee = async (req, res, next) => {
+export const updateTask = async (req, res, next) => {
     try {
         // 從 request 的參數部分 取得 id
         const id = req.params.id;
@@ -85,7 +85,7 @@ export const updateEmployee = async (req, res, next) => {
     }
 };
 
-export const deleteEmployee = async (req, res, next) => {
+export const deleteTask = async (req, res, next) => {
     try {
         const id = req.params.id;
         console.log("Deleting employee= %s", id);
